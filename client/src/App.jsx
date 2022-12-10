@@ -9,7 +9,7 @@ import Navbar from './components/Navbar';
 
 const App = () => {
   return (
-    <div>
+    <div className='h-screen dark:bg-zinc-700 dark:text-white'>
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
