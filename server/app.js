@@ -12,6 +12,7 @@ const serveFavicon = require('serve-favicon');
 const mongoose = require('mongoose');
 const baseRouter = require('./routes/base');
 const quoteRouter = require('./routes/quote');
+const authenticationRouter = require('./routes/authentication');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(express.json());
 
 app.use('/', baseRouter);
 app.use('/quotes', quoteRouter);
+app.use('/authentication', authenticationRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

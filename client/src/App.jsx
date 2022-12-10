@@ -6,6 +6,8 @@ import QuoteCreatePage from './pages/QuoteCreatePage';
 import QuoteDisplaySinglePage from './pages/QuoteDisplaySinglePage';
 import QuoteEditPage from './pages/QuoteEditPage';
 import Navbar from './components/Navbar';
+import LogIn from './pages/LogIn';
+import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Route path='/new-quote' element={<QuoteCreatePage />} />
         <Route path='/quotes/:id/edit' element={<QuoteEditPage />} />
         <Route path='/quotes/:id' element={<QuoteDisplaySinglePage />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </div>
   );

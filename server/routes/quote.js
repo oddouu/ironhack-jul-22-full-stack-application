@@ -3,6 +3,7 @@
 const Quote = require('../models/quote');
 const express = require('express');
 const { route } = require('./base');
+const { routeGuard } = require('./../middleware/routeGuard');
 
 const router = new express.Router();
 
@@ -39,7 +40,7 @@ router.post('/', (req, res, next) => {
 });
 
 // PATCH - /quotes/:id - Updates an existing quote
-router.patch('/:id', (req, res, next) => {
+router.patch('/:id', routeGuard, (req, res, next) => {
   const { id } = req.params;
   const { message, author } = req.body;
   Quote.findByIdAndUpdate(id, { message, author }, { new: true })
@@ -48,7 +49,7 @@ router.patch('/:id', (req, res, next) => {
 });
 
 // DELETE - /quotes/:id - Deletes an existing quote
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', routeGuard, (req, res, next) => {
   const { id } = req.params;
   Quote.findByIdAndDelete(id)
     .then(() => res.json({ success: true }))

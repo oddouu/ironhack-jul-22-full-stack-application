@@ -16,7 +16,13 @@ const Navbar = () => {
           <Link to='/new-quote'>Create new quote</Link>
         </li>
         <li>
-          <ThemeButton className='flex-'/>
+          <ThemeButton className='flex-' />
+        </li>
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+        <li>
+          <Link to='/signup'>Signup</Link>
         </li>
       </ul>
     </nav>
