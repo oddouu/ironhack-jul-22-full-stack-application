@@ -7,7 +7,7 @@ const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleQuoteFormSubmission}>
+    <form onSubmit={handleQuoteFormSubmission} className='flex flex-col'>
       <label htmlFor='message'>Quote</label>
       <input
         type='text'
@@ -34,7 +34,7 @@ const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
         }
         value={quote.author}
       />
-      <button>Submit quote</button>
+      <button className='btn-primary'>Submit quote</button>
     </form>
   );
 };
