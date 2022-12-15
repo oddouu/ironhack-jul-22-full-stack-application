@@ -1,4 +1,5 @@
 import React from 'react';
+import { IKContext, IKUpload } from 'imagekitio-react';
 
 const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
   const handleQuoteFormSubmission = (event) => {
@@ -6,13 +7,22 @@ const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
     onQuoteSubmit();
   };
 
+  const onFileUploadSuccess = (value) => {
+    const { url } = value;
+    onQuoteChange({ ...quote, picture: url });
+  };
+
+  const onFileUploadError = (error) => {
+    console.log('onFileUploadError', error);
+  };
+
   return (
-    <form onSubmit={handleQuoteFormSubmission} className='flex flex-col'>
-      <label htmlFor='message'>Quote</label>
+    <form onSubmit={handleQuoteFormSubmission} className="flex flex-col">
+      <label htmlFor="message">Quote</label>
       <input
-        type='text'
-        name='message'
-        id='message'
+        type="text"
+        name="message"
+        id="message"
         onChange={(event) =>
           onQuoteChange({
             ...quote,
@@ -21,11 +31,12 @@ const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
         }
         value={quote.message}
       />
-      <label htmlFor='author'>Author</label>
+
+      <label htmlFor="author">Author</label>
       <input
-        type='text'
-        name='author'
-        id='author'
+        type="text"
+        name="author"
+        id="author"
         onChange={(event) =>
           onQuoteChange({
             ...quote,
@@ -34,7 +45,29 @@ const QuoteForm = ({ quote, onQuoteChange, onQuoteSubmit }) => {
         }
         value={quote.author}
       />
-      <button className='btn-primary'>Submit quote</button>
+
+      {quote.picture && (
+        <img
+          src={quote.picture}
+          alt={quote.message}
+          className="shadow-md rounded-xl max-w-xs"
+        />
+      )}
+
+      <IKContext
+        // Required for image displayed
+        urlEndpoint={process.env.REACT_APP_IMAGEKIT_URL}
+        // Required for image upload
+        publicKey={process.env.REACT_APP_IMAGEKIT_PUBLIC_KEY}
+        authenticationEndpoint={
+          process.env.REACT_APP_API_BASE_URL +
+          process.env.REACT_APP_IMAGEKIT_AUTHENTICATION_ENDPOINT
+        }
+      >
+        <IKUpload onSuccess={onFileUploadSuccess} onError={onFileUploadError} />
+      </IKContext>
+
+      <button className="btn-primary">Submit quote</button>
     </form>
   );
 };

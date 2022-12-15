@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 const baseRouter = require('./routes/base');
 const quoteRouter = require('./routes/quote');
 const authenticationRouter = require('./routes/authentication');
+const { routeGuard } = require('./middleware/routeGuard');
 
 const app = express();
 

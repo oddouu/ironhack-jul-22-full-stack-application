@@ -6,7 +6,8 @@ import QuoteForm from '../components/QuoteForm';
 const QuoteCreatePage = () => {
   const initialQuote = {
     message: '',
-    author: ''
+    author: '',
+    picture: null
   };
   const [quote, setQuote] = useState(initialQuote);
 
@@ -18,6 +19,7 @@ const QuoteCreatePage = () => {
       navigate(`/quotes/${id}`);
     });
   };
+
   return (
     <div>
       <QuoteForm

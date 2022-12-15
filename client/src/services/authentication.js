@@ -11,6 +11,8 @@ export const signup = (email, password, name) =>
     .then((response) => response.data);
 
 export const verify = (storedToken) =>
-  api.get('/authentication/verify', {
-    headers: { Authorization: `Bearer ${storedToken}` }
-  });
+  api
+    .get('/authentication/verify', {
+      headers: { Authorization: `Bearer ${storedToken}` }
+    })
+    .then((response) => response.data);

@@ -11,16 +11,16 @@ import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
-    <div className='h-screen dark:bg-zinc-700 dark:text-white'>
+    <div className="h-screen dark:bg-zinc-700 dark:text-white">
       <Navbar />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/quotes' element={<QuoteDisplayAllPage />} />
-        <Route path='/new-quote' element={<QuoteCreatePage />} />
-        <Route path='/quotes/:id/edit' element={<QuoteEditPage />} />
-        <Route path='/quotes/:id' element={<QuoteDisplaySinglePage />} />
-        <Route path='/login' element={<LogIn />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/quotes" element={<QuoteDisplayAllPage />} />
+        <Route path="/new-quote" element={<QuoteCreatePage />} />
+        <Route path="/quotes/:id/edit" element={<QuoteEditPage />} />
+        <Route path="/quotes/:id" element={<QuoteDisplaySinglePage />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </div>
   );

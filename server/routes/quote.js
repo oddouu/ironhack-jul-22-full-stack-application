@@ -33,8 +33,9 @@ router.get('/:id', (req, res, next) => {
 
 // POST - /quotes - Creates a new quote
 router.post('/', (req, res, next) => {
-  const { message, author } = req.body;
-  Quote.create({ message, author })
+  const { message, author, picture } = req.body;
+
+  Quote.create({ message, author, picture })
     .then((quote) => res.json({ quote }))
     .catch((err) => next(err));
 });
