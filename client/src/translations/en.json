@@ -1,0 +1,8 @@
+{
+  "authentication.signOut": "Sign Out",
+  "authentication.logIn": "Log In",
+  "authentication.signUp": "Sign Up",
+  "quote.create": "Create Quote",
+  "quote.edit": "Edit Quote",
+  "quote.seeAllQuotes": "All Quotes"
+}

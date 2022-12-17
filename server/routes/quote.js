@@ -2,7 +2,8 @@
 
 const Quote = require('../models/quote');
 const express = require('express');
-const { route } = require('./base');
+const imagekit = require('./../lib/imagekit');
+const openai = require('./../lib/openai');
 const { routeGuard } = require('./../middleware/routeGuard');
 
 const router = new express.Router();
@@ -23,6 +24,26 @@ router.get('/random', (req, res, next) => {
   });
 });
 
+// Search for quotes
+router.get('/search', (req, res, next) => {
+  const { term } = req.query;
+
+  // Quote.find({ message: new RegExp(term, 'ig') })
+  Quote.find({
+    $or: term.split(' ').map((word) => {
+      return { message: new RegExp(word, 'ig') };
+    })
+  })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .then((quotes) => {
+      res.json({ quotes });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 // GET - /quotes/:id - Fetch single quote
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
@@ -32,12 +53,45 @@ router.get('/:id', (req, res, next) => {
 });
 
 // POST - /quotes - Creates a new quote
-router.post('/', (req, res, next) => {
-  const { message, author, picture } = req.body;
+router.post('/', routeGuard, (req, res, next) => {
+  const { message, author, picture, position } = req.body;
 
-  Quote.create({ message, author, picture })
-    .then((quote) => res.json({ quote }))
-    .catch((err) => next(err));
+  if (picture) {
+    Quote.create({ message, author, picture, position })
+      .then((quote) => res.json({ quote }))
+      .catch((err) => next(err));
+  } else {
+    console.log(message, process.env.OPENAI_API_KEY);
+    openai
+      .createImage({
+        prompt: message,
+        n: 1,
+        size: '512x512'
+      })
+      .then((response) => {
+        const generatedPictureUrl = response.data.data[0].url;
+
+        return imagekit.upload({
+          file: generatedPictureUrl,
+          fileName: `${Math.random()}.png`
+        });
+      })
+      .then((response) => {
+        return Quote.create({
+          message,
+          author,
+          picture: response.url,
+          position
+        });
+      })
+      .then((quote) => {
+        res.json({ quote });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        next(err);
+      });
+  }
 });
 
 // PATCH - /quotes/:id - Updates an existing quote

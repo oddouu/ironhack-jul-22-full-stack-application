@@ -1,0 +1,8 @@
+{
+  "authentication.signOut": "Saír",
+  "authentication.logIn": "Inicias Sessão",
+  "authentication.signUp": "Criar Conta",
+  "quote.create": "Criar Citação",
+  "quote.edit": "Editar Citação",
+  "quote.seeAllQuotes": "Ver todas as Citações"
+}

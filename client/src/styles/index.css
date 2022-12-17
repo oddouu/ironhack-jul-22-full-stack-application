@@ -20,4 +20,10 @@ code {
   .btn-primary {
     @apply bg-blue-500 text-white font-bold py-2 my-4 px-4 rounded;
   }
+  .file-picker-primary {
+    @apply block w-full text-sm text-slate-500 file:mr-4 file:my-4 file:py-2 file:px-4 file:rounded file:border-0 file:font-bold file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-100;
+  }
+  /* .input {
+    @apply border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500;
+  } */
 }

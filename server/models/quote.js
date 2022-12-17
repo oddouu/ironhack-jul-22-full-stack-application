@@ -14,10 +14,22 @@ const schema = new mongoose.Schema(
     },
     picture: {
       type: String
+    },
+    position: {
+      lat: {
+        type: Number,
+        min: -90,
+        max: 90
+      },
+      lng: {
+        type: Number,
+        min: -180,
+        max: 180
+      }
     }
   },
   {
-    timestamp: true
+    timestamps: true
   }
 );
 

@@ -1,23 +1,26 @@
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  LoadScript,
+  MarkerF,
+  useJsApiLoader
+} from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '400px',
+  width: '100%',
   height: '400px'
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
+const AuthorLocationMap = ({ position }) => {
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  });
 
-const AuthorLocationMap = () => {
   return (
-    <LoadScript googleMapsApiKey="YOUR_API_KEY">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-        {/* Child components, such as markers, info windows, etc. */}
-        <></>
+    isLoaded && (
+      <GoogleMap mapContainerStyle={containerStyle} center={position} zoom={10}>
+        <MarkerF position={position} />
       </GoogleMap>
-    </LoadScript>
+    )
   );
 };
 

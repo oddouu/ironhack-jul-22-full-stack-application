@@ -38,16 +38,19 @@ const LogIn = (props) => {
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          type="text"
+          type="email"
           name="email"
+          placeholder="Email"
           value={email}
           onChange={handleEmailChange}
         />
+
         <label htmlFor="password">Password</label>
         <input
           id="password"
           type="password"
           name="password"
+          placeholder="Password"
           value={password}
           onChange={handlePasswordChange}
         />
@@ -56,6 +59,7 @@ const LogIn = (props) => {
             <span className="text-rose-700">{errorMessage}</span>
           </div>
         )}
+
         <button className="btn-primary">Log In</button>
       </form>
     </div>

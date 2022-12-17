@@ -3,19 +3,23 @@
 ## Server
 
 ### Models
+
 - Quote
-    - message: String, required
-    - author: String, required
+
+  - message: String, required
+  - author: String, required
 
 - Like
-    - quote: ObjectId, ref: Quote, required
+
+  - quote: ObjectId, ref: Quote, required
 
 - Dislike
-    - quote: ObjectId, ref: Quote, required
+  - quote: ObjectId, ref: Quote, required
 
 ### Endpoints
 
 - GET /quotes - Fetch all quotes
+- GET /quotes/search?term=cat - Search for quotes that match a certain term
 - GET /quotes/:id - Fetch a single quote
 - POST /quotes - Post a new quote
 - PATCH /quotes/:id - Update a single quote
@@ -32,6 +36,7 @@
 - QuoteEditPage => Should display a form to change an existing quote
 
 ### Components
+
 - QuoteContent => It's going to be used to render a single quote (whether random or not)
 - QuoteList => It's going to be used to render multiple quotes
 - QuoteForm => It's going to be used to create or update a quote
@@ -39,7 +44,9 @@
 - Navbar
 
 ### Services
+
 - quoteLoadSingle -> GET /quotes/:id
+- quoteSearch -> GET /quotes/search?term=SEARCH_TERM
 - quoteLoadAll -> GET /quotes
 - quoteLoadRandom -> GET /quotes/random
 - quoteAdd -> POST /quotes
